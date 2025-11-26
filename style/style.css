@@ -1,0 +1,686 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #ffffff; /* Fundo branco puro para o modo claro */
+    color: #333;
+    scroll-behavior: smooth;
+    transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Variáveis CSS (fallback para cores do input e cards) */
+:root {
+    --bg-input: #fff;
+    --text-input: #000;
+    /* Variáveis base para as cores dos Cards (Modo Claro) */
+    --card-bg: #ffffff;
+    --card-color: #222;
+    --card-border: 1px solid #e7e7e7;
+    --card-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+body.dark {
+    /* Define cores gerais para o Dark Mode */
+    background-color: #0c0c0c;
+    color: #e5e7eb;
+
+    /* Define variáveis para inputs no Dark Mode */
+    --bg-input: #333;
+    --text-input: #fff;
+    
+    /* Define variáveis para Cards no Dark Mode (substitui !important) */
+    --card-bg: #161b22;
+    --card-color: #e6e9ee;
+    --card-border: 1px solid rgba(255,255,255,0.04);
+    --card-shadow: 0 6px 18px rgba(0,0,0,0.55);
+}
+
+.secao img {
+    display: block;
+    margin: 25px auto;
+    max-width: 90%;
+    border-radius: 12px;
+}
+
+/* Navbar fixa */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #004c99, #007bff);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+
+.navbar h1 {
+    font-size: 22px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: #ffe600;
+}
+
+.navbar a.ativo {
+    color: #ffe600;
+}
+
+/* Toggle tema (botão) */
+#toggle-theme {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* =======================
+    Pesquisa com lupa (CONSOLIDADO)
+    ======================= */
+.search-container {
+    display: flex;
+    align-items: center; 
+    position: relative;
+    margin-left: 20px;
+}
+
+#search-input {
+    padding: 8px 12px; 
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    width: 180px;
+    padding-right: 40px; 
+    transition: width 0.35s ease, background-color 0.3s, color 0.3s;
+    /* Usa as variáveis CSS */
+    background-color: var(--bg-input);
+    color: var(--text-input);
+}
+
+#search-input::placeholder {
+    color: #aaa;
+}
+
+#search-input:focus {
+    width: 250px;
+    border-color: #007bff;
+}
+
+#search-button {
+    background: transparent;
+    border: none;
+    color: var(--text-input); /* Usa cor do texto para o ícone */
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0;
+    line-height: 1;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    outline-offset: 2px;
+}
+
+/* Mensagem de “Nenhum resultado” */
+.search-empty {
+    text-align: center;
+    color: #ff4444;
+    font-weight: bold;
+    margin: 10px 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* Hero (cabeçalho) */
+.hero {
+    background-color: #ffffff; 
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #333; 
+    margin-top: 65px;
+    transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+.hero .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.0); 
+    z-index: 0;
+    transition: background 0.35s ease;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+#titulo-animado::after {
+    content: '|';
+    animation: piscar 0.8s infinite;
+    color: #007bff; 
+}
+
+@keyframes piscar {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+#subtexto {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+/* Cards */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 50px 20px;
+}
+
+.card {
+    /* Usa as variáveis CSS de cor e fundo, incluindo a transição */
+    background-color: var(--card-bg);
+    border: var(--card-border);
+    color: var(--card-color);
+    box-shadow: var(--card-shadow);
+
+    border-radius: 15px;
+    padding: 25px;
+    width: 280px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.32s ease, color 0.32s ease, border-color 0.32s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    /* Mantém uma sombra leve no modo claro */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
+}
+
+body.dark .card:hover { /* Ajuste de sombra para o modo escuro */
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+    background: #1f242b; /* Fundo levemente mais escuro ao passar o mouse */
+}
+
+.info-oculta {
+    display: none;
+    margin-top: 10px;
+    color: #555;
+}
+
+body.dark .info-oculta {
+    color: #a8a8a8; /* Cor do texto oculto no modo escuro */
+}
+
+/* Carrossel */
+.galeria {
+    text-align: center;
+    margin: 60px 0;
+    padding-bottom: 16px;
+}
+
+.galeria h2 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.carousel-viewport {
+    width: 900px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 12px;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 1.2s cubic-bezier(.22,.9,.2,1);
+    will-change: transform;
+    align-items: center;
+    padding: 18px 0;
+}
+
+.slide {
+    flex: 0 0 540px;
+    min-width: 540px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.dark .slide {
+    background: #161b22; /* Fundo do slide escuro */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Arrows minimalistas */
+.carousel-btn {
+    background: rgba(0,0,0,0.45);
+    color: white;
+    border: none;
+    font-size: 34px;
+    line-height: 1;
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.18s ease, background 0.18s ease;
+    user-select: none;
+}
+
+.carousel-btn:hover { transform: scale(1.04); background: rgba(0,0,0,0.6);}
+
+.carousel-btn:focus { outline: 2px solid rgba(255,255,255,0.4); outline-offset: 2px; }
+
+/* small screens - responsive */
+@media (max-width: 980px) {
+    .carousel-viewport { width: 92vw; }
+    .slide { flex: 0 0 70vw; min-width: 70vw; }
+}
+
+/* Curiosidades */
+.curiosidades {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.curiosidades button {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.curiosidades button:hover {
+    background-color: #004c99;
+    transform: scale(1.05);
+}
+
+#curiosidade {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+    transition: color 0.35s ease;
+}
+
+/* Rodapé */
+footer, #site-footer {
+    background-color: #1188ff; /* Cor padrão do rodapé (modo claro) */
+    color: white;
+    text-align: center;
+    padding: 18px;
+    font-size: 14px;
+    margin-top: 40px;
+    transition: background-color 0.35s ease;
+}
+
+/* Seção da página 'Sobre' */
+.secao {
+    padding-top: 120px; 
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.secao-sobre h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.secao-sobre p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    max-width: 800px; 
+    margin-left: auto; 
+    margin-right: auto; 
+    text-align: center; 
+}
+
+/* ===========================
+    REVELAÇÃO AO ROLAR (Animação)
+    =========================== */
+
+/* Elementos que devem iniciar ocultos */
+.card, .galeria, .curiosidades, .secao:not(.secao-sobre) {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+}
+
+/* A seção 'sobre' (secao-sobre) deve ser visível imediatamente ao carregar */
+.secao-sobre {
+    opacity: 1; 
+    transform: translateY(0);
+    transition: all 0.8s ease-out;
+}
+.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* 🔄 NOVO LOADER CSS (Animação de carregamento) */
+.loader {
+    width: 80px;
+    height: 40px;
+    color: #007bff; /* Usando a cor primária */
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    padding: 3px;
+    /* Linha complexa reescrita */
+    background: repeating-linear-gradient(90deg,currentColor 0 10px,#0000 0 15px) 0/0% no-repeat content-box content-box;
+    position: relative;
+    box-sizing: border-box;
+    animation: l5 2s infinite steps(6);
+}
+.loader::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    left: 100%;
+    width: 10px;
+    /* Linha complexa reescrita */
+    background: linear-gradient(#0000 calc(50% - 7px),currentColor 0 calc(50% - 5px),#0000 0 calc(50% + 5px),currentColor 0 calc(50% + 7px),#0000 0) left /100% 100%, linear-gradient(currentColor calc(50% - 5px),#0000 0 calc(50% + 5px),currentColor 0) left /2px 100%, linear-gradient(#0000 calc(50% - 5px),currentColor 0 calc(50% + 5px),#0000 0) right/2px 100%;
+    background-repeat:no-repeat;
+}
+@keyframes l5 {
+    100% {background-size:120%}
+}
+/* Fim do NOVO LOADER CSS */
+
+
+/* Preloader (Ajustado) */
+#preloader {
+    position: fixed;
+    inset: 0;
+    background: #ffffff; /* Fundo claro para a animação */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+    transition: opacity .6s ease, visibility .6s ease;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-content {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+}
+
+/* Oculta os antigos elementos do preloader que não são mais necessários com o loader CSS */
+.loader-logo, #loader-percent, #loader-bar, #loader-particles {
+    display: none;
+}
+
+
+/* BG particles (mantido) */
+#bg-particles {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0.12;
+    transition: opacity 0.35s ease;
+}
+
+/* ===========================
+    AJUSTES TEMA ESCURO (DARK MODE)
+    =========================== */
+
+/* Navbar - Fundo preto sólido */
+body.dark .navbar {
+    background: #111111;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+body.dark .navbar a {
+    color: #e5e7eb;
+}
+
+/* Hero - Fundo Preto Sólido no Modo Escuro */
+body.dark .hero {
+    background-color: #0c0c0c; 
+    color: #e5e7eb; /* Garante que o texto fique branco */
+}
+
+/* Hero Overlay - Garante que a área do Hero fique escura */
+body.dark .hero .overlay {
+    background: rgba(0,0,0,0.65); 
+}
+
+/* Rodapé - Fundo preto sólido no modo escuro */
+body.dark footer,
+body.dark #site-footer {
+    background: #111111;
+    color: #e5e7eb;
+}
+
+/* Curiosidades */
+body.dark #curiosidade {
+    color: #e5e7eb;
+}
+
+/* Ajuste do preloader no Dark Mode */
+body.dark #preloader {
+    background: #0c0c0c; /* Fundo escuro para a animação no Dark Mode */
+}
+body.dark .loader {
+    color: #4da6ff; /* Cor primária clara para o loader no Dark Mode */
+}
+
+
+/* Buttons focus */
+button:focus { outline: 2px solid rgba(0,0,0,0.12); outline-offset: 2px; }
+
+/* ===========================
+    ESTILO: BOTÃO PEQUENO "VOLTAR AO INÍCIO"
+    =========================== */
+
+.btn-center {
+    text-align: center; 
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.btn-pequeno-voltar {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none; 
+    display: inline-block; 
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-pequeno-voltar:hover {
+    background-color: #004c99;
+    transform: scale(1.05);
+}
+
+/* Ajuste para o tema escuro */
+body.dark .btn-pequeno-voltar {
+    background-color: #007bff; 
+}
+
+body.dark .btn-pequeno-voltar:hover {
+    background-color: #004c99;
+}
+
+
+/* ===========================
+    ESTILOS DO MODAL DE PESQUISA
+    =========================== */
+
+/* Fundo escurecido */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; /* Acima de tudo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.85); /* Fundo escuro e semi-transparente */
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex; /* Usar flexbox para centralizar */
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
+/* Conteúdo do Modal (Janela) */
+.modal-content {
+    background-color: #fefefe;
+    margin: 0 auto; /* Remove o margin anterior */
+    padding: 30px;
+    border-radius: 12px;
+    width: 60%; /* Tamanho médio */
+    max-width: 700px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+    transform: translateY(0);
+}
+
+/* Título */
+#modal-titulo {
+    color: #007bff;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+/* Corpo do Modal */
+#modal-corpo p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #333;
+}
+#modal-corpo h3 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #004c99;
+    font-size: 1.2em;
+}
+
+/* Botão de Fechar */
+.fechar-modal {
+    color: #aaa;
+    float: right;
+    font-size: 38px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    line-height: 1;
+}
+
+.fechar-modal:hover,
+.fechar-modal:focus {
+    color: #ff4444;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Dark Mode Support para o Modal */
+body.dark .modal-content {
+    background-color: #222;
+}
+
+body.dark #modal-titulo {
+    color: #4da6ff;
+    border-color: #444;
+}
+
+body.dark #modal-corpo p {
+    color: #e5e5e5;
+}
+
+body.dark #modal-corpo h3 {
+    color: #4da6ff;
+}

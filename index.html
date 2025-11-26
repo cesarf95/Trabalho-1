@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Descubra Londrina</title>
+  <link rel="stylesheet" href="style/style.css" />
+</head>
+<body>
+
+    <div id="preloader">
+      <div class="loader-content">
+                    <div class="loader"></div>
+          
+                    <img src="assets/html css javascript.webp" class="loader-logo" alt="Logo" style="display: none;">
+          <div id="loader-percent" style="display: none;"></div>
+          <div id="loader-bar" style="display: none;">
+              <div id="loader-fill"></div>
+          </div>
+          <canvas id="loader-particles" style="display: none;"></canvas>
+      </div>
+  </div>
+      <nav class="navbar">
+    <h1>Descubra Londrina</h1>
+    <ul>
+      <li><a href="index.html" class="ativo">Início</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+    </ul>
+
+        <button id="toggle-theme" aria-label="Alternar tema">🌙</button>
+
+        <div class="search-container">
+      <input type="text" id="search-input" placeholder="Pesquisar..." />
+      <button id="search-button" aria-label="Botão de pesquisa">🔍</button>
+    </div>
+  </nav>
+
+    <p id="search-empty" class="search-empty">Nenhum resultado encontrado</p>
+
+    <section class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1 id="titulo-animado"></h1>
+      <p id="subtexto">Conheça curiosidades, lugares e sabores únicos da cidade.</p>
+    </div>
+  </section>
+
+    <section class="cards-container">
+    <div class="card" onclick="mostrarInfo('pontos')">
+      <h2>Pontos Turísticos</h2>
+      <p id="pontos" class="info-oculta">
+        Lago Igapó, Jardim Botânico e o Museu Histórico Padre Carlos Weiss são alguns dos principais pontos turísticos.
+      </p>
+    </div>
+
+    <div class="card" onclick="mostrarInfo('comidas')">
+      <h2>Comidas Típicas</h2>
+      <p id="comidas" class="info-oculta">
+        Londrina é famosa pelo café, pela carne suína e pelas delícias do norte do Paraná.
+      </p>
+    </div>
+
+    <div class="card" onclick="mostrarInfo('eventos')">
+      <h2>Eventos da Cidade</h2>
+      <p id="eventos" class="info-oculta">
+        O Festival Internacional de Londrina (FILO) e a ExpoLondrina são os eventos mais conhecidos da cidade.
+      </p>
+      </div>
+  </section>
+
+ <section class="galeria">
+<h2>Galeria de Imagens</h2>
+<div class="carousel" id="main-carousel" aria-label="Carrossel de imagens">
+<button class="carousel-btn prev" id="carousel-prev" aria-label="Imagem anterior">‹</button>
+<div class="carousel-viewport">
+ <div class="carousel-track" id="carousel-track">
+ <div class="slide"><img src="assets/lago-igapo.jpg.jpg" alt="Lago Igapó"></div>
+<div class="slide"><img src="assets/catedral.jpg.jpg" alt="Catedral de Londrina"></div>
+<div class="slide"><img src="assets/jardim-botanico.jpg.jpg" alt="Jardim Botânico"></div>
+</div>
+</div>
+<button class="carousel-btn next" id="carousel-next" aria-label="Próxima imagem">›</button>
+ </div>
+ </section>
+
+<section class="curiosidades">
+ <h2>Curiosidades sobre Londrina</h2>
+ <button onclick="gerarCuriosidade()">Gerar Curiosidade Aleatória</button>
+ <p id="curiosidade"></p>
+</section>
+
+<footer id="site-footer">
+ Developed By César TDS013 Senai - 2025
+ </footer>
+
+<div id="search-modal" class="modal">
+<div class="modal-content">
+<span class="fechar-modal" onclick="fecharModal()">&times;</span>
+ <h2 id="modal-titulo">Resultado da Pesquisa</h2>
+ <div id="modal-corpo">
+ </div>
+ </div>
+ </div>
+
+<script src="scripts/script.js"></script>
+</body>
+</html>
